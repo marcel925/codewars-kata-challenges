@@ -1,0 +1,75 @@
+function sudoku(puzzle){
+
+    var solved = [1, 2, 3, 4, 5, 6, 7,  8, 9];
+    
+    function trySolve(){
+      //gLoop & fLoop provide the data for the nested loop to add the sudoku squares
+      var fLoop;
+      var gLoop;
+      for (var i = 0; i < puzzle.length; i++){
+        if (i < 3){
+          gLoop = [0, 3];
+        } else if (i < 6){
+          gLoop = [3, 6];
+        } else {
+          gLoop = [6, 9];
+        }
+        for (var j = 0; j < puzzle.length; j++){
+          //console.log("puzzle[i][j]: " + puzzle[i][j]);
+          if (j < 3){
+            fLoop = [0, 3];
+          } else if (j < 6){
+            fLoop = [3, 6];
+          } else {
+            fLoop = [6, 9];
+          }
+          if (puzzle[i][j] == 0){
+            var numbers = [];
+            var options = [];
+            //adding every number in the horizontal line and vertical lines to array called numbers
+            for (var k = 0; k < puzzle.length; k++){
+              numbers.push(puzzle[i][k]);
+              numbers.push(puzzle[k][j]);
+            }
+            //also adding every number from the square of the sudoku using data from above
+            for (var f = fLoop[0]; f < fLoop[1]; f++){
+              for (var g = gLoop[0]; g < gLoop[1]; g++){
+                numbers.push(puzzle[g][f]);
+              }
+            }
+            //checks the numbers 1 to 9, and if it's not part of the numbers array, then it's an option
+            for (var x = 0; x < solved.length; x++){
+            //if only one option is available, then that has to be the solution for that square, therefore change board
+              if (numbers.indexOf(solved[x]) == -1){
+                options.push(solved[x]);
+              }
+            }
+            if (options.length == 1){
+              puzzle[i][j] = options[0];
+            }
+          }
+        }
+      }
+      // counts the number of zeros in the board
+      var count = 0;
+      for (var a = 0; a < puzzle.length; a++){
+        for (var b = 0; b < puzzle.length; b++){
+          if (puzzle[a][b] == 0){
+            count++;
+          }
+        }
+      }
+      //if count == 0, then solution is finished. If not run function trySolve() again
+      //instructions said all solutions will be solvable, otherwise extra logic would be needed
+      if (count != 0) {
+        trySolve();
+      }
+    }
+    
+    trySolve();
+    
+    return puzzle;
+}
+
+//This solution could be made shorter, but I chose not to do that in order to maintain better readability
+//There is probably room for improvement in regards to performance. I would have worked on that if it was needed
