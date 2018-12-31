@@ -73,3 +73,6 @@ function sudoku(puzzle){
 
 //This solution could be made shorter, but I chose not to do that in order to maintain better readability
 //There is probably room for improvement in regards to performance. I would have worked on that if it was needed
+
+//Codewars kata - level 3kyu
+//Link to kata: https://www.codewars.com/kata/sudoku-solver
