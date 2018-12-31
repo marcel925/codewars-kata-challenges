@@ -1,0 +1,52 @@
+/*
+Method is this - we add each of the digits one buy one from the end of the string.
+*/
+
+function add(a, b) {
+  
+  var array = [];
+  
+  var carryOver = 0;
+
+  var longest = a.length;
+  var shortest = b.length;
+  var longerNum = a;
+  var shorterNum = b;
+  
+  if (b > a) {
+    longest = b.length;
+    shortest = a.length;
+    longerNum = b;
+    shorterNum = a;
+  }
+  
+  //adds manually the digits for the length of the shorter number
+  for (var i = 0; i < shortest; i++) {
+    var num = parseInt(longerNum[longerNum.length - 1 - i]) + parseInt(shorterNum[shorterNum.length - 1 - i]) + carryOver;
+    if (num < 10) {
+      array.unshift(num);
+      carryOver = 0;
+    } else {
+      array.unshift(num.toString()[1]);
+      carryOver = 1;
+    }
+  }
+  
+  //adds the digits for the rest of the longer number
+  for (var j = shortest; j < longest; j++) {
+    var num = parseInt(longerNum[longerNum.length - 1 - j]) + carryOver;
+    if (num < 10) {
+      array.unshift(num);
+      carryOver = 0;
+    } else {
+      array.unshift(num.toString()[1]);
+      carryOver = 1;
+    }
+  }
+  
+  if (carryOver == 1) {
+    array.unshift(carryOver);
+  }
+  
+  return array.join("");
+}
