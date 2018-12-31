@@ -50,3 +50,6 @@ function add(a, b) {
   
   return array.join("");
 }
+
+// codewars kata level 4 kyu
+// link to challenge: https://www.codewars.com/kata/adding-big-numbers
