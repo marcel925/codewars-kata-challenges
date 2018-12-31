@@ -1,0 +1,55 @@
+function validSolution(board){
+        
+    var validArray = [];
+
+    for (var b = 1; b <= data.length; b++) {
+      validArray.push(b);
+    }
+
+    var valid = validArray.join("");    
+
+    // check validity for horizontal lines
+    for (var i = 0; i < data.length; i++) {
+       var boardLine = [];
+       for (var j = 0; j < data.length; j++) {
+        boardLine.push(data[i][j]);
+       }
+
+       if (boardLine.sort((a, b) => parseInt(a) - parseInt(b)).join("") !== valid) {
+         return false;
+       }
+    }
+
+    //check validity for vertical lines
+    for (var x = 0; x < data.length; x++) {
+       var boardLine = [];
+       for (var y = 0; y < data.length; y++) {
+          boardLine.push(data[y][x]);
+       }
+       if (boardLine.sort((a, b) => parseInt(a) - parseInt(b)).join("") !== valid) {
+          return false;
+       }
+    }
+
+    //check validity for squares
+    for (var a = 0; a < data.length; a = a + Math.sqrt(data.length)) {
+       for (var b = 0; b < data.length; b = b + Math.sqrt(data.length)) {
+         var boardLine = [];    
+         for (var c = 0; c < Math.sqrt(data.length); c++) {
+           for (var d = 0; d < Math.sqrt(data.length); d++){
+             boardLine.push(data[c+a][d+b]);
+           }
+         }
+       if (boardLine.sort((a, b) => parseInt(a) - parseInt(b)).join("") !== valid) {
+            return false;
+         }
+       }
+    }
+
+    return true;
+}
+
+// This solution would work on a sudoku of any size - eg: 2x2, 3x3, 4x4, 5x5 etc
+
+//Codewars kata level 4kyu
+//Link to this challenge:  https://www.codewars.com/kata/sudoku-solution-validator
