@@ -1,0 +1,36 @@
+function nextBigger(n){
+
+  if (n < 12) {return -1; }
+  
+  var arr = n.toString().split("");
+  var result = 0;
+  
+  for (var i = arr.length-2; i >= 0; i--){
+    if (parseInt(arr[i]) < parseInt(arr[i+1])){
+  
+      var numToChange = arr[i];
+      var beforeNum = arr.slice(0, i);
+      var afterNum = arr.slice(i+1, arr.length);
+      
+      afterNum.sort((a, b) => parseInt(a) - parseInt(b));
+      
+      for (var k = 0; k < afterNum.length; k++) {
+        if (afterNum[k] > numToChange){
+          beforeNum.push(afterNum[k]);
+          afterNum.splice(k, 1);
+          afterNum.push(numToChange);
+          break;
+        }
+      }
+      
+      afterNum.sort((a, b) => parseInt(a) - parseInt(b));
+      result = parseInt(beforeNum.join("") + afterNum.join(""));
+      break;
+    }
+  }
+  
+  return result > 0 ? result : -1;
+}
+
+// codewars kata level 4 kyu
+// link to challenge: https://www.codewars.com/kata/next-bigger-number-with-the-same-digits
