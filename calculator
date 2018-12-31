@@ -34,5 +34,5 @@ const Calculator = function() {
   }
 };
 
-Codewars kata - Level 3kyu
-Link to kata: https://www.codewars.com/kata/calculator/train/javascript
+// Codewars kata - Level 3kyu
+// Link to kata: https://www.codewars.com/kata/calculator
